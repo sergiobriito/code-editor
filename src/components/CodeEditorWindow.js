@@ -24,7 +24,6 @@ const CodeEditorWindow = () => {
 
     const formData = {
       language_id: language_id,
-      // encode source code in base64
       source_code: btoa(value),
     };
     const options = {
@@ -68,9 +67,7 @@ const CodeEditorWindow = () => {
       let response = await axios.request(options);
       let statusId = response.data.status?.id;
 
-      // Processed - we have a result
       if (statusId === 1 || statusId === 2) {
-        // still processing
         setTimeout(() => {
           checkStatus(token);
         }, 2000);
@@ -89,7 +86,6 @@ const CodeEditorWindow = () => {
     let statusId = outputDetails?.status?.id;
 
     if (statusId === 6) {
-      // compilation error
       return (
         <pre className="outputWindow">
           {atob(outputDetails?.compile_output)}
